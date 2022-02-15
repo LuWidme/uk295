@@ -1,15 +1,20 @@
 package com.example.demo.domain.product;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+
+@Entity
 public class Product {
     @NotNull
+    @Id
     private int id;
-
+    private int useless;
     private String description;
-    @Min(2)
+    @Min(0)
     private double price;
 
     public Product() {
