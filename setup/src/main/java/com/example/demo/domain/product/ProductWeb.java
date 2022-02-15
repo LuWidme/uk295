@@ -1,5 +1,6 @@
 package com.example.demo.domain.product;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,20 +15,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/products")
 public class ProductWeb {
-
+    @Operation(summary = "get a product by its ID")
     @GetMapping("/{productId}")
     public ResponseEntity<Product> findById
             (@PathVariable("productId") Integer productId) {
         return ResponseEntity.ok().body(new Product(productId, "sneakers", 50.20));
     }
 
-
-    @GetMapping("/{productId}/2")
-    public ResponseEntity<Product> findById2
-            (@PathVariable("productId") Integer productId) {
-        return ResponseEntity.ok()
-                .body(new Product(productId, "sneakers", 50.20));
-    }
 
     @PostMapping("/{productId}")
     ResponseEntity<String> addProduct(@PathVariable("productId") Integer productId, @RequestBody @Valid Product product) {

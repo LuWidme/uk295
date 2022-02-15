@@ -3,6 +3,7 @@ package com.example.demo.domain.product;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +13,10 @@ public class Product {
     @NotNull
     @Id
     private int id;
+    @Transient
     private int useless;
     private String description;
-    @Min(0)
+    @Min(2)
     private double price;
 
     public Product() {
