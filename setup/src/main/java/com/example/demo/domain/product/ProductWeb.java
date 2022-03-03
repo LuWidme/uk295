@@ -1,5 +1,8 @@
 package com.example.demo.domain.product;
 
+import com.example.demo.domain.product.DTO.ProductDTOWithPrice;
+import com.example.demo.domain.product.DTO.ProductDTOWithoutPrice;
+import com.example.demo.domain.product.DTO.ProductMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductWeb {
 
     private ProductMapper productMapper;
-
+    private ProductService productService;
     @Autowired
     public ProductWeb(ProductMapper productMapper) {
         this.productMapper = productMapper;
