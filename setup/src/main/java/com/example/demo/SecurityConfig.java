@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 //                check form top to bottom => start with most restrictive
 
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user","/api/products/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin").hasAnyRole("ADMIN")
+                .antMatchers("/user","/api/products/**").authenticated()
                 .antMatchers("/api").permitAll()
 //                all paths in current levels and below
 //                .antMatchers("/**")
