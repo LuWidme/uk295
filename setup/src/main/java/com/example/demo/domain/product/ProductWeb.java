@@ -1,5 +1,8 @@
 package com.example.demo.domain.product;
 
+import com.example.demo.domain.product.DTO.ProductDTOWithPrice;
+import com.example.demo.domain.product.DTO.ProductDTOWithoutPrice;
+import com.example.demo.domain.product.DTO.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import java.util.Map;
 public class ProductWeb {
 
     private ProductMapper productMapper;
+    private ProductService productService;
 
     @Autowired
     public ProductWeb(ProductMapper productMapper) {
@@ -38,9 +42,9 @@ public class ProductWeb {
                 .body(productMapper.productToProductDTOWithPrice(new Product(productId,"sneakers",50.20)));
     }
     @PostMapping("/{productId}")
-    ResponseEntity<String> addProduct( @PathVariable("productId") Integer productId, @RequestBody @Valid Product product) {
+    ResponseEntity<Product> addProduct( @PathVariable("productId") Integer productId, @RequestBody @Valid Product product) {
         // persisting the Product
-        return ResponseEntity.ok("Product is valid");
+        return ResponseEntity.ok(productService.save(product));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

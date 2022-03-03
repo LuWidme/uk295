@@ -1,5 +1,6 @@
-package com.example.demo.domain.product;
+package com.example.demo.domain.product.DTO;
 
+import com.example.demo.domain.product.Product;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

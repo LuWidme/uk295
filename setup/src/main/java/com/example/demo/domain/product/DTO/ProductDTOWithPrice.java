@@ -1,14 +1,17 @@
-package com.example.demo.domain.product;
+package com.example.demo.domain.product.DTO;
 
-public class ProductDTOWithoutPrice {
+public class ProductDTOWithPrice {
 
     private int id;
 
     private String description;
 
-    public ProductDTOWithoutPrice(int id, String description) {
+    private double price;
+
+    public ProductDTOWithPrice(int id, String description, double price) {
         this.id = id;
         this.description = description;
+        this.price = price;
     }
 
     public int getId() {
@@ -25,5 +28,13 @@ public class ProductDTOWithoutPrice {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
