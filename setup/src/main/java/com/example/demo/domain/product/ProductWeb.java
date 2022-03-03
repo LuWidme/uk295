@@ -15,18 +15,34 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/products")
 public class ProductWeb {
+
+    private ProductMapper productMapper;
+
+    @Autowired
+    public ProductWeb(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
+
     @Operation(summary = "get a product by its ID")
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> findById
+    public ResponseEntity<ProductDTOWithoutPrice> findById
             (@PathVariable("productId") Integer productId) {
-        return ResponseEntity.ok().body(new Product(productId, "sneakers", 50.20));
+        return ResponseEntity.ok()
+                .body(productMapper.productToProductDTOWithoutPrice
+                        (new Product(productId,"sneakers",50.20)));
     }
 
 
+    @GetMapping("/{productId}/2")
+    public ResponseEntity<ProductDTOWithPrice> findById2
+            (@PathVariable("productId") Integer productId) {
+        return ResponseEntity.ok()
+                .body(productMapper.productToProductDTOWithPrice(new Product(productId,"sneakers",50.20)));
+    }
     @PostMapping("/{productId}")
-    ResponseEntity<String> addProduct(@PathVariable("productId") Integer productId, @RequestBody @Valid Product product) {
+    ResponseEntity<Product> addProduct( @PathVariable("productId") Integer productId, @RequestBody @Valid Product product) {
         // persisting the Product
-        return ResponseEntity.ok("Product is valid");
+        return ResponseEntity.ok(productService.save(product));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
